@@ -72,7 +72,20 @@ console.log(second); // "banana"
 console.log(rest); // ["orange", "mango", "kiwi"]
 ```
 
-## Common Array Methods
+_Spread Syntax:_ The spread syntax is used to create shallow copies of an array.
+```js
+const originalArray = [1, 2, 3];
+const shallowCopiedArray = [...originalArray];
+
+shallowCopiedArray.push(4);
+
+console.log(originalArray); // [1, 2, 3]
+console.log(shallowCopiedArray); // [1, 2, 3, 4]
+```
+
+## Array Methods
+
+### Mutator Methods (modify the original array):
 
 _push() Method:_ This method is used to add elements to the end of the array and will return the new length.
 ```js
@@ -102,14 +115,6 @@ desserts.unshift("ice cream");
 
 console.log(desserts); // ["ice cream", "cake", "cookies", "pie"];
 ```
-_indexOf() Method:_ This method is useful for finding the first index of a specific element within an array. If the element cannot be found, then it will return -1.
-```js
-const fruits = ["apple", "banana", "orange", "banana"];
-const index = fruits.indexOf("banana");
-
-console.log(index); // 1
-console.log(fruits.indexOf("not found")); // -1
-```
 _splice() Method:_ This method is used to add or remove elements from any position in an array. The return value for the splice() method will be an array of the items removed from the array. If nothing is removed, then an empty array will be returned. This method will mutate the original array, modifying it in place rather than creating a new array. The first argument specifies the index at which to begin modifying the array. The second argument is the number of elements you wish to remove. The following arguments are the elements you wish to add.
 ```js
 const colors = ["red", "green", "blue"];
@@ -117,13 +122,21 @@ colors.splice(1, 0, "yellow", "purple");
 
 console.log(colors); // ["red", "yellow", "purple", "green", "blue"]
 ```
-_includes() Method:_ This method is used to check if an array contains a specific value. This method returns true if the array contains the specified element, and false otherwise.
-```js
-const programmingLanguages = ["JavaScript", "Python", "C++"];
 
-console.log(programmingLanguages.includes("Python")); // true
-console.log(programmingLanguages.includes("Perl")); // false
+_sort() Method:_ Sorts the elements of an array in place.
+```js
+let numbers = [3, 1, 4, 1, 5, 9];
+    numbers.sort(); // numbers is now [1, 1, 3, 4, 5, 9]
 ```
+
+_reverse() Method:_ This method reverses an array in place.
+```js
+const desserts = ["cake", "cookies", "pie"];
+console.log(desserts.reverse()); // ["pie", "cookies", "cake"]
+```
+
+### Accessor Methods (do not modify the original array):
+
 _concat() Method:_ This method creates a new array by merging two or more arrays.
 ```js
 const programmingLanguages = ["JavaScript", "Python", "C++"];
@@ -138,15 +151,20 @@ const newList = programmingLanguages.slice(1);
 
 console.log(newList); // ["Python", "C++"]
 ```
-_Spread Syntax:_ The spread syntax is used to create shallow copies of an array.
+_indexOf() Method:_ This method is useful for finding the first index of a specific element within an array. If the element cannot be found, then it will return -1.
 ```js
-const originalArray = [1, 2, 3];
-const shallowCopiedArray = [...originalArray];
+const fruits = ["apple", "banana", "orange", "banana"];
+const index = fruits.indexOf("banana");
 
-shallowCopiedArray.push(4);
+console.log(index); // 1
+console.log(fruits.indexOf("not found")); // -1
+```
+_includes() Method:_ This method is used to check if an array contains a specific value. This method returns true if the array contains the specified element, and false otherwise.
+```js
+const programmingLanguages = ["JavaScript", "Python", "C++"];
 
-console.log(originalArray); // [1, 2, 3]
-console.log(shallowCopiedArray); // [1, 2, 3, 4]
+console.log(programmingLanguages.includes("Python")); // true
+console.log(programmingLanguages.includes("Perl")); // false
 ```
 _split() Method:_ This method divides a string into an array of substrings and specifies where each split should happen based on a given separator. If no separator is provided, the method returns an array containing the original string as a single element.
 ```js
@@ -155,15 +173,45 @@ const charArray = str.split("");
 
 console.log(charArray); // ["h", "e", "l", "l", "o"]
 ```
-_reverse() Method:_ This method reverses an array in place.
-```js
-const desserts = ["cake", "cookies", "pie"];
-console.log(desserts.reverse()); // ["pie", "cookies", "cake"]
-```
 _join() Method:_ This method concatenates all the elements of an array into a single string, with each element separated by a specified separator. If no separator is provided, or an empty string ("") is used, the elements will be joined without any separator.
 ```js
 const reversedArray = ["o", "l", "l", "e", "h"];
 const reversedString = reversedArray.join("");
 
 console.log(reversedString); // "olleh"
+```
+
+###  Iteration Methods (perform an action on each element):
+
+_forEach():_ Executes a provided function once for each array element.
+```js
+    let numbers = [1, 2, 3];
+    numbers.forEach(num => console.log(num * 2)); // Logs 2, 4, 6
+```
+
+_map():_ Creates a new array populated with the results of calling a provided function on every element in the calling array.
+```js
+    let numbers = [1, 2, 3];
+    let doubledNumbers = numbers.map(num => num * 2); // doubledNumbers is [2, 4, 6]
+```
+_filter():_ Creates a new array with all elements that pass the test implemented by the provided function.
+```js
+    let numbers = [1, 2, 3, 4, 5];
+    let evenNumbers = numbers.filter(num => num % 2 === 0); // evenNumbers is [2, 4]
+```
+_reduce():_ Executes a reducer function on each element of the array, resulting in a single output value.
+```js
+    let numbers = [1, 2, 3, 4];
+    let sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0); // sum is 10
+```
+_find():_ Returns the value of the first element in the array that satisfies the provided testing function.
+```js
+    let users = [{id: 1, name: "Alice"}, {id: 2, name: "Bob"}];
+    let bob = users.find(user => user.name === "Bob"); // bob is {id: 2, name: "Bob"}
+```
+_some() / every():_ Checks if at least one/all elements in the array satisfy the provided condition. 
+```js
+    let numbers = [1, 2, 3, 4, 5];
+    let hasEven = numbers.some(num => num % 2 === 0); // hasEven is true
+    let allEven = numbers.every(num => num % 2 === 0); // allEven is false
 ```
