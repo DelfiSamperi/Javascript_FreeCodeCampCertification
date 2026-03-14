@@ -54,7 +54,7 @@ const getResults = (questionObj, randomChoice) => {
   if(randomChoice === questionObj.answer) {
     return `The computer's choice is correct! The answer is: ${ questionObj.answer}`; 
   } else {
-      return `The computer's choice is wrong. The correct answer is: ${ questionObj.answer}`
+    return `The computer's choice is wrong. The correct answer is: ${ questionObj.answer}`
   };
 };
 

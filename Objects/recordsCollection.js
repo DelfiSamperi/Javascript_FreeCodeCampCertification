@@ -21,7 +21,6 @@ const recordCollection = {
 const updateRecords = (records, id, prop, value) => {
   if(value === '') delete records[id][prop];
   if(prop !== 'tracks' && value !== '') records[id][prop] = value;
-  //not working -->
   if(prop === 'tracks' && value!== '') {
     if (!records[id].hasOwnProperty('tracks')) {
         records[id].tracks = [];
